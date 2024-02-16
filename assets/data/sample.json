@@ -1,0 +1,51 @@
+{
+  "ads": [
+
+    {
+      "id" : 1,
+      "title" : "Breakfast",
+      "subtitle" : "French Toast with Berries",
+      "image" : "https://cdn.pixabay.com/photo/2015/06/01/23/43/pasta-794464_1280.jpg",
+      "calories": "120",
+      "time" : "10",
+      "serving" : "1"
+    },
+
+
+    {
+      "id" : 2,
+      "title" : "Main Dish",
+      "subtitle" : "Glazed Salmon",
+      "image" : "https://cdn.pixabay.com/photo/2015/06/01/23/43/pasta-794464_1280.jpg",
+      "calories": "280",
+      "time" : "45",
+      "serving" : "2"
+
+    },
+
+    {
+      "id" : 3,
+      "title" : "Breakfast",
+      "subtitle" : "Brown Sugar Cinnamon Toast",
+      "image" : "https://cdn.pixabay.com/photo/2017/08/06/06/46/bread-2589595_1280.jpg",
+      "calories": "135",
+      "time" : "15",
+      "serving" : "2"
+    },
+
+    {
+      "id" : 4,
+      "title" : "Main Dish",
+      "subtitle" : "Asian Glazed Chicken Thighs",
+      "image" : "https://cdn.pixabay.com/photo/2017/03/30/15/46/churros-2188869_1280.jpg",
+      "calories": "280",
+      "time" : "45",
+      "serving" : "1"
+    }
+
+
+  ]
+
+}
+
+
