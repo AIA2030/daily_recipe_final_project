@@ -72,13 +72,10 @@ class _HomePageState extends State<HomePage> {
 
                   Column(
                     children: [
-
                       SizedBox(
-                        height: 80,
+                        height: 100,
                         child:SearchBarPage(),
                       ),
-
-                      SizedBox(height: 10,),
 
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,

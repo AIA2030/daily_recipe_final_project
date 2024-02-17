@@ -50,11 +50,13 @@ class _SearchBarPageState extends State<SearchBarPage> {
               children: <Widget>[
                 Expanded(
                   child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 15.0),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(25),
                         color: Colors.grey.shade100,
                       ),
-                      height: 40,
+                      height: 50,
                       child: Center(
                         child: TextField(
                           controller: _searchController,
@@ -63,19 +65,19 @@ class _SearchBarPageState extends State<SearchBarPage> {
                             hintStyle: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.w500,
-                              color: Colors.grey.shade400,
+                              color: Colors.grey.shade500,
                               fontFamily: 'Hellix',
                             ),
+                            border: InputBorder.none,
                             suffixIcon: IconButton(
 
                               icon: Icon(Icons.search_outlined,
-                                  color: Colors.grey.shade400, size: 23),
+                                  color: Colors.grey.shade500, size: 23),
                               onPressed: () {
                                 searchFromFirebase(_searchController.text);
                               },
                             ),
                             focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.deepOrange)),
-                            border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
                           ),
                           onChanged: (query) {},
                         ),
@@ -88,10 +90,10 @@ class _SearchBarPageState extends State<SearchBarPage> {
                 Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(15),
                     color: Colors.grey.shade100,
                   ),
-                  height: 45,
+                  height: 50,
                   width: 45,
                   child: IconButton(
                     icon: Icon(FontAwesomeIcons.sliders,
@@ -203,11 +205,13 @@ class _FavoriteSearchBarPageState extends State<FavoriteSearchBarPage> {
               children: <Widget>[
                 Expanded(
                   child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 15.0),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.transparent),
+                      borderRadius: BorderRadius.circular(25),
                       color: Colors.grey.shade100,
                     ),
-                    height: 40,
+                    height: 50,
                     child: Center(
                       child: TextField(
                         controller: _searchController,
@@ -216,12 +220,12 @@ class _FavoriteSearchBarPageState extends State<FavoriteSearchBarPage> {
                           hintStyle: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.w500,
-                            color: Colors.grey.shade400,
+                            color: Colors.grey.shade500,
                             fontFamily: 'Hellix',
                           ),
                           suffixIcon: IconButton(
                             icon: Icon(Icons.search_outlined,
-                                color: Colors.grey.shade400, size: 23),
+                                color: Colors.grey.shade500, size: 23),
                             onPressed: () {
                               searchFavoriteRecipes(_searchController.text);
                             },
@@ -240,10 +244,10 @@ class _FavoriteSearchBarPageState extends State<FavoriteSearchBarPage> {
                 Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(15),
                     color: Colors.grey.shade100,
                   ),
-                  height: 45,
+                  height: 50,
                   width: 45,
                   child: IconButton(
                     icon: Icon(FontAwesomeIcons.sliders,
@@ -355,11 +359,13 @@ class _RecentlyViewedSearchBarPageState extends State<RecentlyViewedSearchBarPag
               children: <Widget>[
                 Expanded(
                   child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 15.0),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.transparent),
+                      borderRadius: BorderRadius.circular(25),
                       color: Colors.grey.shade100,
                     ),
-                    height: 40,
+                    height: 50,
                     child: Center(
                       child: TextField(
                         controller: _searchController,
@@ -368,12 +374,12 @@ class _RecentlyViewedSearchBarPageState extends State<RecentlyViewedSearchBarPag
                           hintStyle: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.w500,
-                            color: Colors.grey.shade400,
+                            color: Colors.grey.shade500,
                             fontFamily: 'Hellix',
                           ),
                           suffixIcon: IconButton(
                             icon: Icon(Icons.search_outlined,
-                                color: Colors.grey.shade400, size: 23),
+                                color: Colors.grey.shade500, size: 23),
                             onPressed: () {
                               searchRecentlyViewedRecipes(_searchController.text);
                             },
@@ -392,10 +398,10 @@ class _RecentlyViewedSearchBarPageState extends State<RecentlyViewedSearchBarPag
                 Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(15),
                     color: Colors.grey.shade100,
                   ),
-                  height: 45,
+                  height: 50,
                   width: 45,
                   child: IconButton(
                     icon: Icon(FontAwesomeIcons.sliders,

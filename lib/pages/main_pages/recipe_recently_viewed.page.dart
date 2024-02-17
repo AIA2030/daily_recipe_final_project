@@ -55,7 +55,7 @@ class _RecentlyViewedPageState extends State<RecentlyViewedPage> {
                   Container(
                     padding: EdgeInsets.all(15),
                     child: SizedBox(
-                      height: 80,
+                      height: 100,
                       child:RecentlyViewedSearchBarPage(),
                     ),
                   ),
