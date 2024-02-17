@@ -3,6 +3,7 @@ import 'package:daily_recipes_final/pages/login_pages/register.dart';
 import 'package:daily_recipes_final/provider/app_auth.provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
