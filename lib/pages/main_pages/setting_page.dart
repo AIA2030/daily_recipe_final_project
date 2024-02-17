@@ -212,9 +212,25 @@ class _SettingPageState extends State<SettingPage> {
                                                     onPressed: () {
                                                       showDialog(
                                                         context: context,
-                                                        builder: (context) => AlertDialog(
-                                                          title: Text('Edit User Name'),
+                                                        builder: (context) => AnimatedContainer(
+                                                        duration: Duration(milliseconds: 300),
+                                                        child: AlertDialog(
+                                                          backgroundColor: Colors.black87,
+                                                          title: Center(
+                                                            child: Text('Edit User Name',  style: TextStyle(
+                                                              color: Colors.deepOrange,
+                                                              fontWeight: FontWeight.bold,
+                                                              fontSize: 25.0,
+                                                              fontFamily: 'Hellix',
+                                                            ),),
+                                                          ),
                                                           content: TextField(
+                                                            style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontWeight: FontWeight.w500,
+                                                              fontSize: 20.0,
+                                                              fontFamily: 'Hellix',
+                                                            ),
                                                             controller: nameController,
                                                             decoration: InputDecoration(
                                                               hintText: 'Enter new user name',
@@ -225,7 +241,12 @@ class _SettingPageState extends State<SettingPage> {
                                                               onPressed: () {
                                                                 Navigator.pop(context);
                                                               },
-                                                              child: Text('Cancel'),
+                                                              child: Text('Cancel', style: TextStyle(
+                                                                color: Colors.white,
+                                                                fontWeight: FontWeight.w600,
+                                                                fontSize: 16.0,
+                                                                fontFamily: 'Hellix',
+                                                              ),),
                                                             ),
                                                             TextButton(
                                                               onPressed: () {
@@ -233,9 +254,15 @@ class _SettingPageState extends State<SettingPage> {
                                                                 Provider.of<AppAuthProvider>(context, listen: false).setUserName(newUserName);
                                                                 Navigator.pop(context);
                                                               },
-                                                              child: Text('Save'),
+                                                              child: Text('Save', style: TextStyle(
+                                                                color: Colors.deepOrange,
+                                                                fontWeight: FontWeight.w600,
+                                                                fontSize: 16.0,
+                                                                fontFamily: 'Hellix',
+                                                              ),),
                                                             ),
                                                           ],
+                                                        ),
                                                         ),
                                                       );
                                                     },

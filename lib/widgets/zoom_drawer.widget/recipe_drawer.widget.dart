@@ -5,7 +5,6 @@ import 'package:daily_recipes_final/pages/main_pages/home_page.dart';
 import 'package:daily_recipes_final/pages/main_pages/ingredient_page/ingredientpage.dart';
 import 'package:daily_recipes_final/pages/main_pages/recipe_recently_viewed.page.dart';
 import 'package:daily_recipes_final/pages/main_pages/setting_page.dart';
-import 'package:daily_recipes_final/pages/main_pages/signout.widget.dart';
 import 'package:daily_recipes_final/pages/main_pages/zoom_menu.page.dart';
 import 'package:daily_recipes_final/provider/app_auth.provider.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
@@ -73,17 +72,63 @@ class _ZoomDrawerMenuState extends State<ZoomDrawerMenu> {
       case MenuItems.Setting:
         return SettingPage();
 
-      case MenuItems.SignOut:
-        return InkWell(
-          onTap: () async {
-            Provider.of<AppAuthProvider>(context, listen: false).signOut(context);
-
-          },
-
-          child: Center(
-            child: SignOutPage(),
+    case MenuItems.SignOut:
+    return  AlertDialog(
+      backgroundColor: Colors.black87,
+      title: Center(
+        child: Text(
+          'Sign Out',
+          style: TextStyle(
+            color: Colors.deepOrange,
+            fontWeight: FontWeight.bold,
+            fontSize: 25.0,
+            fontFamily: 'Hellix',
           ),
-        );
+        ),
+      ),
+      content: Container(
+        child: Text(
+          'Are you sure you want to sign out?',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+            fontSize: 20.0,
+            fontFamily: 'Hellix',
+          ),
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text(
+            'Cancel',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+              fontSize: 16.0,
+              fontFamily: 'Hellix',
+            ),
+          ),
+        ),
+        TextButton(
+          onPressed: () {
+            Provider.of<AppAuthProvider>(context, listen: false)
+                .signOut(context);
+          },
+          child: Text(
+            'Sign Out',
+            style: TextStyle(
+              color: Colors.deepOrange,
+              fontWeight: FontWeight.w600,
+              fontSize: 16.0,
+              fontFamily: 'Hellix',
+            ),
+          ),
+        ),
+      ],
+    );
 
       case MenuItems.Home:
         return HomePage();
@@ -91,6 +136,70 @@ class _ZoomDrawerMenuState extends State<ZoomDrawerMenu> {
         return HomePage();
     }
   }
+
+  // void _showSignOutDialog(BuildContext context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) => AlertDialog(
+  //       backgroundColor: Colors.black87,
+  //       title: Center(
+  //         child: Text(
+  //           'Sign Out',
+  //           style: TextStyle(
+  //             color: Colors.deepOrange,
+  //             fontWeight: FontWeight.bold,
+  //             fontSize: 25.0,
+  //             fontFamily: 'Hellix',
+  //           ),
+  //         ),
+  //       ),
+  //       content: Container(
+  //         child: Text(
+  //           'Are you sure you want to sign out?',
+  //           style: TextStyle(
+  //             color: Colors.white,
+  //             fontWeight: FontWeight.w500,
+  //             fontSize: 20.0,
+  //             fontFamily: 'Hellix',
+  //           ),
+  //         ),
+  //       ),
+  //       actions: [
+  //         TextButton(
+  //           onPressed: () {
+  //             Navigator.pop(context);
+  //           },
+  //           child: Text(
+  //             'Cancel',
+  //             style: TextStyle(
+  //               color: Colors.white,
+  //               fontWeight: FontWeight.w600,
+  //               fontSize: 16.0,
+  //               fontFamily: 'Hellix',
+  //             ),
+  //           ),
+  //         ),
+  //         TextButton(
+  //           onPressed: () {
+  //             Provider.of<AppAuthProvider>(context, listen: false)
+  //                 .signOut(context);
+  //           },
+  //           child: Text(
+  //             'Sign Out',
+  //             style: TextStyle(
+  //               color: Colors.deepOrange,
+  //               fontWeight: FontWeight.w600,
+  //               fontSize: 16.0,
+  //               fontFamily: 'Hellix',
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+
 }
 
 
