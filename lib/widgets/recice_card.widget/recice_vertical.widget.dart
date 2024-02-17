@@ -38,7 +38,7 @@ class _RecipeVerticalWidgetState extends State<RecipeVerticalWidget> {
             reverse:true,
             scrollDirection: Axis.vertical,
             child: AnimatedContainer(
-                duration: Duration(milliseconds: 500),
+                duration: Duration(milliseconds: 3000),
                 padding: EdgeInsets.symmetric(vertical: 10,),
                 child:  Expanded(
                   child: Card(

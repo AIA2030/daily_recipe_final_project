@@ -15,7 +15,8 @@ class RecipeViewWidget extends StatefulWidget {
   State<RecipeViewWidget> createState() => _RecipeViewWidgetState();
 }
 
-class _RecipeViewWidgetState extends State<RecipeViewWidget> {
+class _RecipeViewWidgetState extends State<RecipeViewWidget> with SingleTickerProviderStateMixin{
+  late AnimationController _controller;
   double rating = 0;
   bool isFavourite = false;
 
@@ -25,6 +26,16 @@ class _RecipeViewWidgetState extends State<RecipeViewWidget> {
     isFavourite = widget.recipe?.favourite_users_ids?.contains(
         FirebaseAuth.instance.currentUser?.uid) ??
         false;
+
+    _controller = AnimationController(vsync: this, duration: Duration(milliseconds: 3000));
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -43,32 +54,42 @@ class _RecipeViewWidgetState extends State<RecipeViewWidget> {
 
                     children: [
 
-                      Container(
+                     SlideTransition(position: Tween<Offset>(
+                       begin: Offset(0, -1),
+                       end: Offset.zero,
+                     ).animate(_controller),
+                       child:  Container(
 
-                        child: Text(widget.recipe?.type ?? 'No Name', style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500, color: Colors.cyan, fontFamily: 'Hellix'),),
+                         child: Text(widget.recipe?.type ?? 'No Name', style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500, color: Colors.cyan, fontFamily: 'Hellix'),),
 
-                      ),
+                       ),
+                     ),
 
                       SizedBox(height: 5,),
 
-                      Container(
-                        child:  Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children:[
-                              Container(
-                                child: Wrap (
-                                  children: [
-                                  SizedBox (
-                                       width: 290,
-                                      child:Text( widget.recipe?.title ?? 'No Title', style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold, color: Colors.black87, fontFamily: 'Hellix'),),
-                                  )],
+
+                      SlideTransition(position: Tween<Offset>(
+                        begin: Offset(0, -1),
+                        end: Offset.zero,
+                      ).animate(_controller),
+                        child:  Container(
+                          child:  Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children:[
+                                Container(
+                                  child: Wrap (
+                                    children: [
+                                      SizedBox (
+                                        width: 290,
+                                        child:Text( widget.recipe?.title ?? 'No Title', style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold, color: Colors.black87, fontFamily: 'Hellix'),),
+                                      )],
+                                  ),
                                 ),
-                              ),
 
-                              SizedBox(width: 20,),
+                                SizedBox(width: 20,),
 
-                              Container(
+                                Container(
                                   alignment: Alignment.topRight,
                                   child: InkWell(
                                     onTap: () {
@@ -89,145 +110,219 @@ class _RecipeViewWidgetState extends State<RecipeViewWidget> {
                                       color: isFavourite ? Colors.red : Colors.grey,
                                     ),
                                   ),
-                              ),
+                                ),
 
-                            ]
+                              ]
+                          ),
+
                         ),
-
                       ),
+
+
 
                       SizedBox(height: 5,),
 
-                      Container(
-                        child: Column(
-                          children: <Widget>[
-                            Transform.translate(
-                              offset:Offset(0, 0),
-                              child:Container(
-                                padding: EdgeInsets.all(5),
-                                height: 350,
-                                width: 450,
-                                child:  Image.network(widget.recipe?.image ?? 'Not Found Image',fit: BoxFit.fill, width: 400, height: 350,),
-                              ),)
-                          ],
-                        ),
+                      SlideTransition(position: Tween<Offset>(
+                        begin: Offset(1, 0),
+                        end: Offset.zero,
+                      ).animate(_controller),
+                        child:  Hero(tag: widget.recipe.docId!,
+                          child: Container(
+                            child: Column(
+                              children: <Widget>[
+                                Transform.translate(
+                                  offset:Offset(0, 0),
+                                  child:Container(
+                                    padding: EdgeInsets.all(5),
+                                    height: 350,
+                                    width: 450,
+                                    child:  Image.network(widget.recipe?.image ?? 'Not Found Image',fit: BoxFit.fill, width: 400, height: 350,),
+                                  ),)
+                              ],
+                            ),
 
+                          ),),
                       ),
 
+
+
                       SizedBox(height: 10,),
+
+
 
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
 
                         children: [
-                          Container(
-                              child: RatingBar.builder(
-                                initialRating: ((widget.recipe?.rate ?? 0) / 5.0) * 5.0.toDouble(),
-                                maxRating: 1,
-                                itemCount: 5,
-                                itemSize: 20.0,
-                                itemBuilder: (context, _) => Icon(Icons.star, color: Colors.deepOrange,size: 4 ),
-                                onRatingUpdate: (rating) => setState(() {
-                                  this.rating = rating;
-                                }
+                          SlideTransition(position: Tween<Offset>(
+                            begin: Offset(-1, 0),
+                            end: Offset.zero,
+                          ).animate(_controller),
+                            child:  Container(
+                                child: RatingBar.builder(
+                                  initialRating: ((widget.recipe?.rate ?? 0) / 5.0) * 5.0.toDouble(),
+                                  maxRating: 1,
+                                  itemCount: 5,
+                                  itemSize: 20.0,
+                                  itemBuilder: (context, _) => Icon(Icons.star, color: Colors.deepOrange,size: 4 ),
+                                  onRatingUpdate: (rating) => setState(() {
+                                    this.rating = rating;
+                                  }
 
-                                ),
+                                  ),
 
-                              )
+                                )
 
+                            ),
                           ),
+
 
                           SizedBox(width: 60,),
+                          SlideTransition(position: Tween<Offset>(
+                            begin: Offset(1, 0),
+                            end: Offset.zero,
+                          ).animate(_controller),
+                            child:  Container(
+                              child: Text( 'Rates: ${widget.recipe?.rate}', style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500, color: Colors.deepOrange, fontFamily: 'Hellix'),),
 
-                          Container(
-                            child: Text( 'Rates: ${widget.recipe?.rate}', style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500, color: Colors.deepOrange, fontFamily: 'Hellix'),),
 
-
+                            ),
                           ),
+
                         ],
                       ),
 
                       SizedBox(height: 10,),
+                      SlideTransition(position: Tween<Offset>(
+                        begin: Offset(-1, 0),
+                        end: Offset.zero,
+                      ).animate(_controller),
+                        child:  Container(
 
-                      Container(
-
-                        child: Text( 'Calories: ${widget.recipe?.calories}', style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500, color: Colors.deepOrange, fontFamily: 'Hellix'),),
+                          child: Text( 'Calories: ${widget.recipe?.calories}', style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500, color: Colors.deepOrange, fontFamily: 'Hellix'),),
 
 
-                      ),
-
-                      SizedBox(height: 10,),
-
-                      Container(
-                        child:Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-
-                          children:
-                          [
-                            Row(
-                              children: [
-                                Icon(FontAwesomeIcons.clock, color: Colors.grey, size: 12),
-                                SizedBox(width: 5,),
-                                Text( 'Total Time:  ${widget.recipe?.total_time}', style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w500, color: Colors.grey, fontFamily: 'Hellix'),),
-
-                              ],
-                            ),
-
-                            SizedBox(width: 60,),
-
-                            Row(
-                              children: [
-                                Icon(FontAwesomeIcons.bellConcierge, color: Colors.grey, size: 12),
-                                SizedBox(width: 5,),
-                                Text( 'Serving:  ${widget.recipe?.serving}', style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w500, color: Colors.grey, fontFamily: 'Hellix'),),
-                              ],
-                            ),
-                          ],
                         ),
                       ),
 
+
+
                       SizedBox(height: 10,),
 
-                      Container(
-                        child: Text( widget.recipe?.describtion ?? 'No Name', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: Colors.black87, fontFamily: 'Hellix'),),
+
+                      Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+
+                            children:
+                            [
+                              SlideTransition(position: Tween<Offset>(
+                                begin: Offset(-1, 0),
+                                end: Offset.zero,
+                              ).animate(_controller),
+                                child: Container(
+                                  child:Row(
+                                    children: [
+                                      Icon(FontAwesomeIcons.clock, color: Colors.grey, size: 12),
+                                      SizedBox(width: 5,),
+                                      Text( 'Total Time:  ${widget.recipe?.total_time}', style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w500, color: Colors.grey, fontFamily: 'Hellix'),),
+
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+
+                              SizedBox(width: 60,),
+                              SlideTransition(position: Tween<Offset>(
+                                begin: Offset(1, 0),
+                                end: Offset.zero,
+                              ).animate(_controller),
+                                child: Container(
+                                  child: Row(
+                                    children: [
+                                      Icon(FontAwesomeIcons.bellConcierge, color: Colors.grey, size: 12),
+                                      SizedBox(width: 5,),
+                                      Text( 'Serving:  ${widget.recipe?.serving}', style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w500, color: Colors.grey, fontFamily: 'Hellix'),),
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+                            ],
+                          ),
+
+
+                      SizedBox(height: 10,),
+
+                      SlideTransition(position: Tween<Offset>(
+                        begin: Offset(-1, 0),
+                        end: Offset.zero,
+                      ).animate(_controller),
+                        child:   Container(
+                          child: Text( widget.recipe?.describtion ?? 'No Name', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: Colors.black87, fontFamily: 'Hellix'),),
+                        ),
+                      ),
+
+
+                      SizedBox(height: 20,),
+
+                      SlideTransition(position: Tween<Offset>(
+                        begin: Offset(1, 0),
+                        end: Offset.zero,
+                      ).animate(_controller),
+                        child:  Container(
+                          child: Text("Ingredients", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black87, fontFamily: 'Hellix'),),
+                        ),
+                      ),
+
+
+                      SizedBox(height: 5,),
+
+                      SlideTransition(position: Tween<Offset>(
+                        begin: Offset(1, 0),
+                        end: Offset.zero,
+                      ).animate(_controller),
+                        child:  SizedBox(
+                          child: IngredientsDetailsWidget (recipe: widget.recipe!,),
+                        ),
                       ),
 
                       SizedBox(height: 20,),
 
-                      Container(
-                        child: Text("Ingredients", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black87, fontFamily: 'Hellix'),),
+                      SlideTransition(position: Tween<Offset>(
+                        begin: Offset(0, 1),
+                        end: Offset.zero,
+                      ).animate(_controller),
+                        child:   Container(
+                          child: Text("directions", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black87, fontFamily: 'Hellix'),),
+                        ),
                       ),
+
 
                       SizedBox(height: 5,),
 
-                      SizedBox(
-                        child: IngredientsDetailsWidget (recipe: widget.recipe!,),
-                      ),
-                      SizedBox(height: 20,),
+                      SlideTransition(position: Tween<Offset>(
+                        begin: Offset(0, 1),
+                        end: Offset.zero,
+                      ).animate(_controller),
+                        child: Container(
+                          padding: EdgeInsets.all(10),
 
-                      Container(
-                        child: Text("directions", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black87, fontFamily: 'Hellix'),),
-                      ),
-
-                      SizedBox(height: 5,),
-
-                      Container(
-                        padding: EdgeInsets.all(10),
-
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children:
-                          List.generate(
-                            widget.recipe?.directions?.length ?? 0,
-                                (index) => Padding(padding: EdgeInsets.all(5),
-                              child: Text(
-                                '${widget.recipe.directions!.keys.toList()[index]}: ${widget.recipe.directions!.values.toList()[index]}',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black87,
-                                  fontFamily: 'Hellix',
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children:
+                            List.generate(
+                              widget.recipe?.directions?.length ?? 0,
+                                  (index) => Padding(padding: EdgeInsets.all(5),
+                                child: Text(
+                                  '${widget.recipe.directions!.keys.toList()[index]}: ${widget.recipe.directions!.values.toList()[index]}',
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black87,
+                                    fontFamily: 'Hellix',
+                                  ),
                                 ),
                               ),
                             ),

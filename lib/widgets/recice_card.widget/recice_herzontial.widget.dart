@@ -35,7 +35,8 @@ class _RecipeHerzontialWidgetState extends State<RecipeHerzontialWidget> {
       return SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: AnimatedContainer(
-          duration: Duration(milliseconds: 500),
+          curve: Curves.linear,
+          duration: Duration(milliseconds: 3000),
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Card(
             elevation: 4,
