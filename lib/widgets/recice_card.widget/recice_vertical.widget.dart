@@ -19,11 +19,14 @@ class RecipeVerticalWidget extends StatefulWidget {
 
 class _RecipeVerticalWidgetState extends State<RecipeVerticalWidget> {
   double rating = 0;
+  bool isFavourite = false;
 
   @override
   void initState() {
-    Provider.of<RecipeProvider>(context, listen: false).getRecipe();
     super.initState();
+    isFavourite = widget.recipe?.favourite_users_ids?.contains(
+        FirebaseAuth.instance.currentUser?.uid) ??
+        false;
   }
 
   @override
@@ -34,7 +37,8 @@ class _RecipeVerticalWidgetState extends State<RecipeVerticalWidget> {
           return SingleChildScrollView(
             reverse:true,
             scrollDirection: Axis.vertical,
-            child: Container(
+            child: AnimatedContainer(
+                duration: Duration(milliseconds: 500),
                 padding: EdgeInsets.symmetric(vertical: 10,),
                 child:  Expanded(
                   child: Card(
@@ -183,18 +187,26 @@ class _RecipeVerticalWidgetState extends State<RecipeVerticalWidget> {
                             Column(
                               children: <Widget> [
                                 Container(
-                                    child: InkWell(
-                                        onTap: () {
-                                          Provider.of<RecipeProvider>(context, listen: false).addRecipesToUserFavourite(
-                                              widget.recipe!.docId!,
-                                              !(widget.recipe?.favourite_users_ids?.contains(
-                                                  FirebaseAuth.instance.currentUser?.uid) ?? false));
-                                        },
-
-                                        child: (widget.recipe?.favourite_users_ids?.contains(
-                                            FirebaseAuth.instance.currentUser?.uid) ?? false
-                                            ? const Icon( FontAwesomeIcons.solidHeart, size: 25, color: Colors.red,)
-                                            : const Icon( FontAwesomeIcons.heart, size: 25, color: Colors.grey,)))),
+                                    child:  InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          isFavourite = !isFavourite;
+                                          Provider.of<RecipeProvider>(context, listen: false)
+                                              .addRecipesToUserFavourite(
+                                            widget.recipe!.docId!,
+                                            isFavourite,
+                                          );
+                                        });
+                                      },
+                                      child: Icon(
+                                        isFavourite
+                                            ? FontAwesomeIcons.solidHeart
+                                            : FontAwesomeIcons.heart,
+                                        size: 25,
+                                        color: isFavourite ? Colors.red : Colors.grey,
+                                      ),
+                                    ),
+                                ),
 
                                 SizedBox(height: 10,),
 

@@ -17,11 +17,14 @@ class RecipeViewWidget extends StatefulWidget {
 
 class _RecipeViewWidgetState extends State<RecipeViewWidget> {
   double rating = 0;
+  bool isFavourite = false;
 
   @override
   void initState() {
-    Provider.of<RecipeProvider>(context, listen: false).getRecipe();
     super.initState();
+    isFavourite = widget.recipe?.favourite_users_ids?.contains(
+        FirebaseAuth.instance.currentUser?.uid) ??
+        false;
   }
 
   @override
@@ -68,17 +71,25 @@ class _RecipeViewWidgetState extends State<RecipeViewWidget> {
                               Container(
                                   alignment: Alignment.topRight,
                                   child: InkWell(
-                                      onTap: () {
-                                        Provider.of<RecipeProvider>(context, listen: false).addRecipesToUserFavourite(
-                                            widget.recipe!.docId!,
-                                            !(widget.recipe?.favourite_users_ids?.contains(
-                                                FirebaseAuth.instance.currentUser?.uid) ?? false));
-                                      },
-
-                                      child: (widget.recipe?.favourite_users_ids?.contains(
-                                          FirebaseAuth.instance.currentUser?.uid) ?? false
-                                          ? const Icon( FontAwesomeIcons.solidHeart, size: 25, color: Colors.red,)
-                                          : const Icon( FontAwesomeIcons.heart, size: 25, color: Colors.grey,)))),
+                                    onTap: () {
+                                      setState(() {
+                                        isFavourite = !isFavourite;
+                                        Provider.of<RecipeProvider>(context, listen: false)
+                                            .addRecipesToUserFavourite(
+                                          widget.recipe!.docId!,
+                                          isFavourite,
+                                        );
+                                      });
+                                    },
+                                    child: Icon(
+                                      isFavourite
+                                          ? FontAwesomeIcons.solidHeart
+                                          : FontAwesomeIcons.heart,
+                                      size: 25,
+                                      color: isFavourite ? Colors.red : Colors.grey,
+                                    ),
+                                  ),
+                              ),
 
                             ]
                         ),
