@@ -61,8 +61,6 @@ class _HeaderDrawerState extends State<HeaderDrawer> {
                 child: Text('View Profile', style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w500, color: Colors.grey.shade400, fontFamily: 'Hellix')),
 
               )
-
-
             ],
           ),
         ),

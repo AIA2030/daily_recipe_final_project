@@ -25,7 +25,8 @@ class _FilterSliderPageState extends State<FilterSliderPage> {
               children: [
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,                  children: <Widget>[
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
                   Container(
                     padding: EdgeInsets.only(top:30.0),
                     child: Text("Serving", style: TextStyle(color: Colors.black87, fontSize: 20.0, fontWeight: FontWeight.bold, fontFamily: 'Hellix'),),
@@ -69,7 +70,8 @@ class _FilterSliderPageState extends State<FilterSliderPage> {
               children: [
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,                  children: <Widget>[
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
                   Container(
                     padding: EdgeInsets.only(top:30.0),
                     child: Text("Preparation Time", style: TextStyle(color: Colors.black87, fontSize: 20.0, fontWeight: FontWeight.bold, fontFamily: 'Hellix'),),
@@ -114,7 +116,8 @@ class _FilterSliderPageState extends State<FilterSliderPage> {
               children: [
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,                  children: <Widget>[
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
                   Container(
                     padding: EdgeInsets.only(top:30.0),
                     child: Text("Calories", style: TextStyle(color: Colors.black87, fontSize: 20.0, fontWeight: FontWeight.bold, fontFamily: 'Hellix'),),

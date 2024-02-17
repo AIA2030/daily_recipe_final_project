@@ -2,7 +2,6 @@
 import 'package:daily_recipes_final/provider/ingredient.provider.dart';
 import 'package:daily_recipes_final/widgets/ingredients.widget/ads_ingredients.widget.dart';
 import 'package:daily_recipes_final/widgets/zoom_drawer.widget/zoom_menu.widget.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

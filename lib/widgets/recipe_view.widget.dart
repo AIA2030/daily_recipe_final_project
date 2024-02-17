@@ -335,8 +335,6 @@ class _RecipeViewWidgetState extends State<RecipeViewWidget> with SingleTickerPr
             ),
           );
         },),
-
-
       ),
     );
 

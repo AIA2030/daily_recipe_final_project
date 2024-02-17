@@ -3,7 +3,6 @@ import 'package:daily_recipes_final/provider/recipe.provider.dart';
 import 'package:daily_recipes_final/widgets/recice_card.widget/recice_vertical.widget.dart';
 import 'package:daily_recipes_final/widgets/recipe_searchbar.widget/recipe_section_searchbar.dart';
 import 'package:daily_recipes_final/widgets/zoom_drawer.widget/zoom_menu.widget.dart';
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
